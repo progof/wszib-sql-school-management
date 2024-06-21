@@ -336,7 +336,7 @@ System powinien umożliwić:
 
 ### g. dokumentacje w postaci diagramu obejmującego komplet użytych elementów schematu sporządzonego narzędziem dostępnym w ramach wykorzystanej technologii
 
-<img src="https://i.imgur.com/yJeHSY3.png" />
+<img src="https://i.imgur.com/cAuz9id.png" />
 
 ### h. kod SQL służący do wygenerowania opracowanego schematu bazy danych
 
