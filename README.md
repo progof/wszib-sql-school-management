@@ -199,117 +199,17 @@ System powinien umożliwić:
 
 ### d. normalizację schematu do postaci normalnej (3NF)
 
-### Tabela `employees`
+1. Tabele rooms, courses, groups, students, teachers, subjects: Te tabele już spełniają 3NF. Nie ma zależności przechodnich między atrybutami niekluczowymi.
 
-| Nazwa atrybutu | Typ          | Opis/Uwagi                             |
-| -------------- | ------------ | -------------------------------------- |
-| employee_id    | INT          | Klucz główny, identyfikator pracownika |
-| first_name     | VARCHAR(50)  | Imię pracownika, wymagane              |
-| last_name      | VARCHAR(50)  | Nazwisko pracownika, wymagane          |
-| subjects       | VARCHAR(100) | Zajęcia prowadzone przez pracownika    |
+2. Tabela room_assignments: Spełnia 3NF, ponieważ wszystkie atrybuty niekluczowe (start_time, end_time) są zależne tylko od klucza podstawowego (assignment_id) i nie ma zależności przechodnich.
 
-- Normalizacja do 3NF: Tabela employees jest w postaci 3NF. Nie zawiera powtarzających się grup atrybutów ani wielowartościowych zależności funkcyjnych.
+3. Tabela courses_schedule: Jest to tabela łącząca między courses i room_assignments, spełnia 3NF.
 
----
+4. Tabela student_courses: Może wydawać się, że spełnia 3NF, ale warto zauważyć, że student_id jest unikalne, co sugeruje, że student może być zapisany tylko na jeden kurs. Jeśli to błąd, należy usunąć ograniczenie UNIQUE dla student_id, aby umożliwić studentom zapisywanie się na wiele kursów.
 
-### Tabela `students`
+5. Tabela teacher_salaries: Spełnia 3NF. Każdy atrybut niekluczowy zależy bezpośrednio od klucza podstawowego (salary_id).
 
-| Nazwa atrybutu | Typ         | Opis/Uwagi                         |
-| -------------- | ----------- | ---------------------------------- |
-| student_id     | INT         | Klucz główny, identyfikator ucznia |
-| first_name     | VARCHAR(50) | Imię ucznia, wymagane              |
-| last_name      | VARCHAR(50) | Nazwisko ucznia, wymagane          |
-| section        | VARCHAR(50) | Sekcja, do której uczęszcza uczeń  |
-| class          | VARCHAR(10) | Klasa, do której uczęszcza uczeń   |
-
-- Normalizacja do 3NF: Tabela `students` jest w postaci 3NF. Nie zawiera powtarzających się grup atrybutów ani wielowartościowych zależności funkcyjnych.
-
----
-
-### Tabela `sections`
-
-| Nazwa atrybutu | Typ         | Opis/Uwagi                         |
-| -------------- | ----------- | ---------------------------------- |
-| section_id     | INT         | Klucz główny, identyfikator sekcji |
-| name           | VARCHAR(50) | Nazwa sekcji                       |
-
-- Normalizacja do 3NF: Tabela `sections` jest w postaci 3NF. Zawiera tylko jeden klucz główny i nie posiada powtarzających się grup atrybutów.
-
----
-
-### Tabela `subjects`
-
-| Nazwa atrybutu | Typ         | Opis/Uwagi                             |
-| -------------- | ----------- | -------------------------------------- |
-| subject_id     | INT         | Klucz główny, identyfikator przedmiotu |
-| name           | VARCHAR(50) | Nazwa przedmiotu                       |
-
-- Normalizacja do 3NF: Tabela `subjects` jest w postaci 3NF. Zawiera tylko jeden klucz główny i nie posiada powtarzających się grup atrybutów.
-
----
-
-### Tabela `teachers_subjects`
-
-| Nazwa atrybutu | Typ                      | Opis/Uwagi                                       |
-| -------------- | ------------------------ | ------------------------------------------------ |
-| teacher_id     | INT                      | Klucz obcy do employees.employee_id              |
-| subject_id     | INT                      | Klucz obcy do subjects.subject_id                |
-| PRIMARY KEY    | (teacher_id, subject_id) | Klucz główny: połączenie teacher_id i subject_id |
-
-- Normalizacja do 3NF: Tabela `teachers_subjects` jest w postaci 3NF. Posiada klucz główny składający się z dwóch kluczy obcych, nie zawiera powtarzających się grup atrybutów.
-
----
-
-### Tabela `fees`
-
-| Nazwa atrybutu | Typ           | Opis/Uwagi                         |
-| -------------- | ------------- | ---------------------------------- |
-| fee_id         | INT           | Klucz główny, identyfikator opłaty |
-| student_id     | INT           | Klucz obcy do students.student_id  |
-| amount         | DECIMAL(10,2) | Kwota opłaty                       |
-| due_date       | DATE          | Termin płatności                   |
-
-- Normalizacja do 3NF: Tabela `fees` jest w postaci 3NF. Posiada klucz główny oraz klucz obcy, nie zawiera powtarzających się grup atrybutów.
-
----
-
-### Tabela `salaries`
-
-| Nazwa atrybutu | Typ           | Opis/Uwagi                                |
-| -------------- | ------------- | ----------------------------------------- |
-| salary_id      | INT           | Klucz główny, identyfikator wynagrodzenia |
-| employee_id    | INT           | Klucz obcy do employees.employee_id       |
-| amount         | DECIMAL(10,2) | Kwota wynagrodzenia                       |
-| payment_date   | DATE          | Data wypłaty wynagrodzenia                |
-
-- Normalizacja do 3NF: Tabela `salaries` jest w postaci 3NF. Posiada klucz główny oraz klucz obcy, nie zawiera powtarzających się grup atrybutów.
-
----
-
-### Tabela `rooms`
-
-| Nazwa atrybutu | Typ         | Opis/Uwagi                       |
-| -------------- | ----------- | -------------------------------- |
-| room_id        | INT         | Klucz główny, identyfikator sali |
-| name           | VARCHAR(50) | Nazwa sali                       |
-
-- Normalizacja do 3NF: Tabela `rooms` jest w postaci 3NF. Zawiera tylko jeden klucz główny i nie posiada powtarzających się grup atrybutów.
-
----
-
-### Tabela `classes`
-
-| Nazwa atrybutu | Typ       | Opis/Uwagi                          |
-| -------------- | --------- | ----------------------------------- |
-| class_id       | INT       | Klucz główny, identyfikator zajęć   |
-| subject_id     | INT       | Klucz obcy do subjects.subject_id   |
-| teacher_id     | INT       | Klucz obcy do employees.employee_id |
-| room_id        | INT       | Klucz obcy do rooms.room_id         |
-| schedule       | TIMESTAMP | Harmonogram zajęć                   |
-
-- Normalizacja do 3NF: Tabela `classes` jest w postaci 3NF. Posiada klucz główny oraz klucze obce, nie zawiera powtarzających się grup atrybutów.
-
----
+6. Tabela group_subjects i group_subject_schedule: Spełniają 3NF, ponieważ łączą grupy, przedmioty i nauczycieli bez zależności przechodnich.
 
 ### e. definicję kuczy obcych zapewniających integralność danych
 
