@@ -25,285 +25,835 @@ Cele projektu: zaprojektuj bazę danych do przechowywania informacji o pracownik
 
 ### a. opis koncepcji rozwiązania:
 
-```
-Tabele główne:
+Projektowana baza danych ma na celu zarządzanie informacjami dotyczącymi pracowników szkoły, uczniów, prowadzonych zajęć oraz powiązanych z nimi aspektów organizacyjnych i finansowych. Struktura bazy danych została zaprojektowana z uwzględnieniem różnych elementów i ich wzajemnych relacji. Kluczowe elementy to:
 
-Pracownicy (employees): Zawiera informacje o pracownikach szkoły, takie jak identyfikator, imię, nazwisko oraz przypisane zajęcia.
-Uczniowie (students): Przechowuje dane o uczniach, w tym identyfikator, imię, nazwisko, sekcję i klasę.
-Relacje między tabelami:
+- Pracownicy (`teachers`) - Tabela przechowuje dane osobowe nauczycieli. Każdy nauczyciel ma unikalny identyfikator, imię i nazwisko.
 
-Nauczyciele-Przedmioty (teachers_subjects): Określa powiązania między nauczycielami a przypisanymi do nich przedmiotami.
-Opłaty (fees): Tabela przechowująca informacje o opłatach dla uczniów, takie jak identyfikator ucznia, kwota opłaty i termin płatności.
-Wynagrodzenia (salaries): Przechowuje dane dotyczące wynagrodzeń nauczycieli, zawierające identyfikator pracownika, kwotę wynagrodzenia i datę wypłaty.
-Dodatkowe tabele:
+- Wynagrodzenia nauczycieli (`teacher_salaries`) - Tabela zawiera informacje o wynagrodzeniach nauczycieli, w tym kwotę wynagrodzenia oraz datę wypłaty. Dzięki temu możliwe jest monitorowanie i zarządzanie płatnościami dla nauczycieli.
 
-Sekcje (sections): Lista sekcji dostępnych w szkole, z której uczniowie są przydzielani do odpowiednich klas.
-Przedmioty (subjects): Lista przedmiotów oferowanych w szkole, z których nauczyciele prowadzą zajęcia.
-Pomieszczenia (rooms): Informacje o salach lekcyjnych i laboratoriach, które są przydzielane do zajęć z uwzględnieniem harmonogramu.
-Założenia funkcjonalne:
+- Uczniowie (`students`) - Tabela zawiera dane osobowe uczniów, informacje o grupach (sekcjach) do których należą. Każdy uczeń ma unikalny identyfikator, imię, nazwisko oraz identyfikator grupy.
 
-Zarządzanie harmonogramem zajęć (tabela classes) obejmuje przypisanie sal, nauczycieli oraz czasu zajęć, zabezpieczając przed kolizjami czasowymi w tej samej sali.
-Uczniowie mogą być przypisani tylko do jednej sekcji, co jest kontrolowane przez unikalność danych w warstwie aplikacyjnej.
-System umożliwia kontrolę nad opłatami uczniów (tabela fees) i wynagrodzeniami nauczycieli (tabela salaries), zapewniając dokładność i terminowość płatności.
-```
+- Opłaty za ucznia (`student_courses`) - Tabela przechowuje informacje o dokonanych płatnościach za kursy przez uczniów. Każdy zapis zawiera identyfikator ucznia, identyfikator kursu oraz datę płatności. Mechanizm płatności umożliwia kontrolę nad zapisami na kursy, uniemożliwiając uczestnictwo uczniom, którzy nie dokonali wymaganych opłat.
+
+- Klasy (`groups`) - Tabela przechowuje informacje o grupach uczniów. Każda grupa ma unikalny identyfikator i nazwę.
+
+- Przedmioty (`subjects`) - Tabela przechowuje informacje o przedmiotach nauczanych w szkole. Każdy przedmiot ma unikalny identyfikator i nazwę.
+
+- Klasy i przedmioty (`group_subjects`) - Tabela przypisuje przedmioty do grup uczniów oraz nauczycieli odpowiedzialnych za te przedmioty. Dzięki temu możliwe jest łatwe zarządzanie planem zajęć i przypisaniami nauczycieli.
+
+- Zajęcia (`courses`) - Tabela zajęć przechowuje informacje o dostępnych kursach, ich terminach oraz kosztach, umożliwiając kompleksowe zarządzanie ofertą edukacyjną szkoły.
+
+- Pomieszczenia (`rooms`) - Tabela przechowuje informacje o dostępnych salach, w tym unikalne identyfikatory i nazwy pomieszczeń, co umożliwia ich efektywne wykorzystanie.
+
+- Przydziały pomieszczeń (`room_assignments`) - Tabela zarządza przydziałami sal na zajęcia, uwzględniając harmonogram zajęć, aby zapobiegać kolizjom czasowym.
+
+- Harmonogramy (`courses_schedule`, `group_subject_schedule`) - Te tabele umożliwiają szczegółowe planowanie zajęć, przypisując konkretne przedmioty i kursy do określonych sal w określonych godzinach, co pozwala na efektywne wykorzystanie zasobów.
 
 ### b. dokumentację przypadków użycia (np. diagramy UML use case):
 
-System powinien umożliwić:
-
-#### Zarządzanie pracownikami:
-
-- Dodawanie pracownika: Administrator może dodać nowego pracownika do systemu, wprowadzając jego dane osobowe oraz informacje o przypisanych zajęciach.
-- Edycja pracownika: Administrator może edytować dane istniejącego pracownika, takie jak imię, nazwisko oraz przypisane zajęcia.
-- Usuwanie pracownika: Administrator może usunąć pracownika ze systemu.
-
-#### Zarządzanie uczniami:
-
-- Dodawanie ucznia: Administrator może dodać nowego ucznia do systemu, wprowadzając jego dane osobowe oraz przypisując do odpowiedniej sekcji i klasy.
-- Edycja ucznia: Administrator może edytować dane istniejącego ucznia, takie jak imię, nazwisko, sekcja i klasa.
-- Usuwanie ucznia: Administrator może usunąć ucznia ze systemu.
-
-#### Zarządzanie sekcjami:
-
-- Dodawanie sekcji: Administrator może dodać nową sekcję do systemu, określając jej nazwę.
-- Edycja sekcji: Administrator może zmienić nazwę istniejącej sekcji.
-- Usuwanie sekcji: Administrator może usunąć sekcję z systemu, o ile nie ma przypisanych do niej żadnych uczniów.
-
-#### Zarządzanie przedmiotami:
-
-- Dodawanie przedmiotu: Administrator może dodać nowy przedmiot do systemu, podając jego nazwę.
-- Edycja przedmiotu: Administrator może zmienić nazwę istniejącego przedmiotu.
-- Usuwanie przedmiotu: Administrator może usunąć przedmiot z systemu, o ile nie jest przypisany do żadnego nauczyciela.
-
-#### Zarządzanie nauczycielami i ich przypisanymi przedmiotami:
-
-- Przypisanie nauczyciela do przedmiotu: Administrator może przypisać nauczyciela do prowadzenia określonego przedmiotu.
-- Edycja przypisania nauczyciela do przedmiotu: Administrator może zmienić przypisanie nauczyciela do przedmiotu.
-- Usuwanie przypisania nauczyciela do przedmiotu: Administrator może usunąć przypisanie nauczyciela do przedmiotu.
-
-#### Zarządzanie opłatami uczniów:
-
-- Dodawanie opłaty: Administrator może dodać nową opłatę dla konkretnego ucznia, określając kwotę oraz termin płatności.
-- Edycja opłaty: Administrator może zmienić kwotę lub termin płatności istniejącej opłaty.
-- Usuwanie opłaty: Administrator może usunąć opłatę.
-
-#### Zarządzanie wynagrodzeniami nauczycieli:
-
-- Dodawanie wynagrodzenia: Administrator może dodać nowe wynagrodzenie dla konkretnego nauczyciela, wprowadzając kwotę oraz datę wypłaty.
-- Edycja wynagrodzenia: Administrator może zmienić kwotę lub datę wypłaty istniejącego wynagrodzenia.
-- Usuwanie wynagrodzenia: Administrator może usunąć wynagrodzenie.
-
-#### Zarządzanie zajęciami i przydziałem sal:
-
-- Przypisanie sali do zajęć: Administrator może przypisać konkretne zajęcia do określonej sali w harmonogramie.
-- Edycja przypisania sali do zajęć: Administrator może zmienić przypisanie sali dla istniejących zajęć.
-- Usuwanie przypisania sali do zajęć: Administrator może usunąć przypisanie sali dla zajęć.
+#### Soon...
 
 ### c. dokumentację (modelu fizycznego) schematu bazy danych z wykorzystaniem dowolnej notacji, z wyraźnym określeniem wszelkich niezbędnych kluczy głównych
 
 ## Model Fizyczny Schematu Bazy Danych
 
-### Tabela `employees`
+### Tabela rooms
 
-- **Opis**: Tabela przechowująca informacje o pracownikach szkoły.
-
-| Nazwa atrybutu | Typ          | Opis/Uwagi                             |
-| -------------- | ------------ | -------------------------------------- |
-| employee_id    | INT          | Klucz główny, identyfikator pracownika |
-| first_name     | VARCHAR(50)  | Imię pracownika, wymagane              |
-| last_name      | VARCHAR(50)  | Nazwisko pracownika, wymagane          |
-| subjects       | VARCHAR(100) | Zajęcia prowadzone przez pracownika    |
-
-### Tabela `students`
-
-- **Opis**: Tabela przechowująca informacje o uczniach szkoły.
-
-| Nazwa atrybutu | Typ         | Opis/Uwagi                         |
-| -------------- | ----------- | ---------------------------------- |
-| student_id     | INT         | Klucz główny, identyfikator ucznia |
-| first_name     | VARCHAR(50) | Imię ucznia, wymagane              |
-| last_name      | VARCHAR(50) | Nazwisko ucznia, wymagane          |
-| section        | VARCHAR(50) | Sekcja, do której uczęszcza uczeń  |
-| class          | VARCHAR(10) | Klasa, do której uczęszcza uczeń   |
-
-### Tabela `sections`
-
-- **Opis**: Tabela przechowująca informacje o sekcjach w szkole.
-
-| Nazwa atrybutu | Typ         | Opis/Uwagi                         |
-| -------------- | ----------- | ---------------------------------- |
-| section_id     | INT         | Klucz główny, identyfikator sekcji |
-| name           | VARCHAR(50) | Nazwa sekcji                       |
-
-### Tabela `subjects`
-
-- **Opis**: Tabela przechowująca informacje o przedmiotach nauczania.
-
-| Nazwa atrybutu | Typ         | Opis/Uwagi                             |
-| -------------- | ----------- | -------------------------------------- |
-| subject_id     | INT         | Klucz główny, identyfikator przedmiotu |
-| name           | VARCHAR(50) | Nazwa przedmiotu                       |
-
-### Tabela `teachers_subjects`
-
-- **Opis**: Tabela łącznikowa przechowująca informacje o przypisaniach nauczycieli do przedmiotów.
-
-| Nazwa atrybutu | Typ                      | Opis/Uwagi                                       |
-| -------------- | ------------------------ | ------------------------------------------------ |
-| teacher_id     | INT                      | Klucz obcy do `employees.employee_id`            |
-| subject_id     | INT                      | Klucz obcy do `subjects.subject_id`              |
-| PRIMARY KEY    | (teacher_id, subject_id) | Klucz główny: połączenie teacher_id i subject_id |
-
-### Tabela `fees`
-
-- **Opis**: Tabela przechowująca informacje o opłatach dla uczniów.
-
-| Nazwa atrybutu | Typ           | Opis/Uwagi                          |
-| -------------- | ------------- | ----------------------------------- |
-| fee_id         | INT           | Klucz główny, identyfikator opłaty  |
-| student_id     | INT           | Klucz obcy do `students.student_id` |
-| amount         | DECIMAL(10,2) | Kwota opłaty                        |
-| due_date       | DATE          | Termin płatności                    |
-
-### Tabela `salaries`
-
-- **Opis**: Tabela przechowująca informacje o wynagrodzeniach pracowników.
-
-| Nazwa atrybutu | Typ           | Opis/Uwagi                                |
-| -------------- | ------------- | ----------------------------------------- |
-| salary_id      | INT           | Klucz główny, identyfikator wynagrodzenia |
-| employee_id    | INT           | Klucz obcy do `employees.employee_id`     |
-| amount         | DECIMAL(10,2) | Kwota wynagrodzenia                       |
-| payment_date   | DATE          | Data wypłaty wynagrodzenia                |
-
-### Tabela `rooms`
-
-- **Opis**: Tabela przechowująca informacje o salach lekcyjnych.
+- **Opis**: Tabela przechowująca informacje o salach.
 
 | Nazwa atrybutu | Typ         | Opis/Uwagi                       |
 | -------------- | ----------- | -------------------------------- |
 | room_id        | INT         | Klucz główny, identyfikator sali |
-| name           | VARCHAR(50) | Nazwa sali                       |
+| name           | VARCHAR(64) | Wymagane, unikalna nazwa sali    |
 
-### Tabela `classes`
+---
 
-- **Opis**: Tabela przechowująca informacje o planie zajęć.
+### Tabela room_assignments
 
-| Nazwa atrybutu | Typ       | Opis/Uwagi                            |
-| -------------- | --------- | ------------------------------------- |
-| class_id       | INT       | Klucz główny, identyfikator zajęć     |
-| subject_id     | INT       | Klucz obcy do `subjects.subject_id`   |
-| teacher_id     | INT       | Klucz obcy do `employees.employee_id` |
-| room_id        | INT       | Klucz obcy do `rooms.room_id`         |
-| schedule       | TIMESTAMP | Harmonogram zajęć                     |
+- **Opis**: Tabela przechowująca przypisania sal do zajęć.
+
+| Nazwa atrybutu | Typ      | Opis/Uwagi                                    |
+| -------------- | -------- | --------------------------------------------- |
+| assignment_id  | INT      | Klucz główny, identyfikator przypisania       |
+| room_id        | INT      | Wymagane, klucz obcy do tabeli rooms(room_id) |
+| start_time     | DATETIME | Wymagane, czas rozpoczęcia przypisania        |
+| end_time       | DATETIME | Wymagane, czas zakończenia przypisania        |
+
+---
+
+### Tabela courses
+
+- **Opis**: Tabela przechowująca informacje o kursach.
+
+| Nazwa atrybutu | Typ           | Opis/Uwagi                        |
+| -------------- | ------------- | --------------------------------- |
+| course_id      | INT           | Klucz główny, identyfikator kursu |
+| name           | VARCHAR(64)   | Wymagane, unikalna nazwa kursu    |
+| start_date     | DATE          | Wymagane, data rozpoczęcia kursu  |
+| end_date       | DATE          | Wymagane, data zakończenia kursu  |
+| price          | DECIMAL(10,2) | Wymagane, cena kursu              |
+
+---
+
+### Tabela courses_schedule
+
+- **Opis**: Tabela przechowująca harmonogram kursów i przypisania do sal.
+
+| Nazwa atrybutu | Typ | Opis/Uwagi                                                     |
+| -------------- | --- | -------------------------------------------------------------- |
+| course_id      | INT | Wymagane, klucz obcy do tabeli courses(course_id)              |
+| assignment_id  | INT | Wymagane, klucz obcy do tabeli room_assignments(assignment_id) |
+
+---
+
+### Tabela groups
+
+- **Opis**: Tabela przechowująca informacje o grupach kursowych.
+
+| Nazwa atrybutu | Typ         | Opis/Uwagi                        |
+| -------------- | ----------- | --------------------------------- |
+| group_id       | INT         | Klucz główny, identyfikator grupy |
+| name           | VARCHAR(64) | Wymagane, unikalna nazwa grupy    |
+
+---
+
+### Tabela students
+
+- **Opis**: Tabela przechowująca informacje o studentach.
+
+| Nazwa atrybutu | Typ         | Opis/Uwagi                                      |
+| -------------- | ----------- | ----------------------------------------------- |
+| student_id     | INT         | Klucz główny, identyfikator studenta            |
+| first_name     | VARCHAR(64) | Wymagane, imię studenta                         |
+| last_name      | VARCHAR(64) | Wymagane, nazwisko studenta                     |
+| group_id       | INT         | Wymagane, klucz obcy do tabeli groups(group_id) |
+
+---
+
+### Tabela student_courses
+
+- **Opis**: Tabela przechowująca informacje o przypisaniach studentów do kursów.
+
+| Nazwa atrybutu | Typ      | Opis/Uwagi                                |
+| -------------- | -------- | ----------------------------------------- |
+| student_id     | INT      | Klucz obcy do tabeli students(student_id) |
+| course_id      | INT      | Klucz obcy do tabeli courses(course_id)   |
+| payment_date   | DATETIME | Wymagane, data dokonania płatności        |
+
+---
+
+### Tabela teachers
+
+- **Opis**: Tabela przechowująca informacje o nauczycielach.
+
+| Nazwa atrybutu | Typ         | Opis/Uwagi                              |
+| -------------- | ----------- | --------------------------------------- |
+| teacher_id     | INT         | Klucz główny, identyfikator nauczyciela |
+| first_name     | VARCHAR(64) | Wymagane, imię nauczyciela              |
+| last_name      | VARCHAR(64) | Wymagane, nazwisko nauczyciela          |
+
+---
+
+### Tabela teacher_salaries
+
+- **Opis**: Tabela przechowująca informacje o wynagrodzeniach nauczycieli.
+
+| Nazwa atrybutu | Typ           | Opis/Uwagi                                          |
+| -------------- | ------------- | --------------------------------------------------- |
+| salary_id      | INT           | Klucz główny, identyfikator wynagrodzenia           |
+| teacher_id     | INT           | Wymagane, klucz obcy do tabeli teachers(teacher_id) |
+| amount         | DECIMAL(10,2) | Wymagane, kwota wynagrodzenia                       |
+| payment_date   | DATE          | Wymagane, data wypłaty wynagrodzenia                |
+
+---
+
+### Tabela subjects
+
+- **Opis**: Tabela przechowująca informacje o przedmiotach.
+
+| Nazwa atrybutu | Typ         | Opis/Uwagi                             |
+| -------------- | ----------- | -------------------------------------- |
+| subject_id     | INT         | Klucz główny, identyfikator przedmiotu |
+| name           | VARCHAR(64) | Wymagane, unikalna nazwa przedmiotu    |
+
+---
+
+### Tabela group_subjects
+
+- **Opis**: Tabela przechowująca przypisania grup do przedmiotów i nauczycieli.
+
+| Nazwa atrybutu   | Typ | Opis/Uwagi                                          |
+| ---------------- | --- | --------------------------------------------------- |
+| group_subject_id | INT | Klucz główny, identyfikator przypisania             |
+| group_id         | INT | Wymagane, klucz obcy do tabeli groups(group_id)     |
+| subject_id       | INT | Wymagane, klucz obcy do tabeli subjects(subject_id) |
+| teacher_id       | INT | Wymagane, klucz obcy do tabeli teachers(teacher_id) |
+
+---
+
+### Tabela group_subject_schedule
+
+- **Opis**: Tabela przechowująca harmonogram przypisań grup do sal.
+
+| Nazwa atrybutu   | Typ | Opis/Uwagi                                                      |
+| ---------------- | --- | --------------------------------------------------------------- |
+| group_subject_id | INT | Wymagane, klucz obcy do tabeli group_subjects(group_subject_id) |
+| assignment_id    | INT | Wymagane, klucz obcy do tabeli room_assignments(assignment_id)  |
 
 ### d. normalizację schematu do postaci normalnej (3NF)
 
-1. Tabele rooms, courses, groups, students, teachers, subjects: Te tabele już spełniają 3NF. Nie ma zależności przechodnich między atrybutami niekluczowymi.
+#### 1. Tabela `rooms`:
 
-2. Tabela room_assignments: Spełnia 3NF, ponieważ wszystkie atrybuty niekluczowe (start_time, end_time) są zależne tylko od klucza podstawowego (assignment_id) i nie ma zależności przechodnich.
+- Posiada klucz główny room_id.
+- Kolumna name jest unikalna i niekluczowa.
+- Spełnia 3NF, nie ma zależności przechodnich.
 
-3. Tabela courses_schedule: Jest to tabela łącząca między courses i room_assignments, spełnia 3NF.
+#### 2. Tabela `room_assignments`:
 
-4. Tabela student_courses: Może wydawać się, że spełnia 3NF, ale warto zauważyć, że student_id jest unikalne, co sugeruje, że student może być zapisany tylko na jeden kurs. Jeśli to błąd, należy usunąć ograniczenie UNIQUE dla student_id, aby umożliwić studentom zapisywanie się na wiele kursów.
+- Klucz główny to assignment_id.
+- Atrybuty start_time i end_time są zależne tylko od assignment_id.
+- Spełnia 3NF, brak zależności przechodnich.
 
-5. Tabela teacher_salaries: Spełnia 3NF. Każdy atrybut niekluczowy zależy bezpośrednio od klucza podstawowego (salary_id).
+#### 3. Tabela `courses`:
 
-6. Tabela group_subjects i group_subject_schedule: Spełniają 3NF, ponieważ łączą grupy, przedmioty i nauczycieli bez zależności przechodnich.
+- Klucz główny to course_id.
+- Kolumny name, start_date, end_date, price są bezpośrednio zależne od course_id.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 4. Tabela `courses_schedule`:
+
+- Łączy course_id z assignment_id.
+- Każdy wpis w tej tabeli odnosi się do konkretnej lekcji kursu w sali.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 5. Tabela `groups`:
+
+- Klucz główny to group_id.
+- Kolumna name jest unikalna i niekluczowa.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 6. Tabela `students`:
+
+- Klucz główny to student_id.
+- first_name, last_name, group_id są bezpośrednio zależne od student_id.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 7. Tabela `student_courses`:
+
+- Klucze obce student_id i course_id.
+- payment_date jest zależne od student_id i course_id.
+- Uwaga: Istnieje ograniczenie UNIQUE dla student_id, co może oznaczać, że student może być zapisany tylko na jeden kurs.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 8. Tabela `teachers`:
+
+- Klucz główny to teacher_id.
+- first_name, last_name są bezpośrednio zależne od teacher_id.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 9. Tabela `teacher_salaries`:
+
+- Klucz główny to salary_id.
+- teacher_id, amount, payment_date są bezpośrednio zależne od salary_id.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 10. Tabela `subjects`:
+
+- Klucz główny to subject_id.
+- Kolumna name jest unikalna i niekluczowa.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 11. Tabela `group_subjects`:
+
+- Łączy group_id, subject_id, teacher_id.
+- Spełnia 3NF, nie ma zależności przechodnich.
+
+#### 12. Tabela `group_subject_schedule`:
+
+- Łączy group_subject_id z assignment_id.
+- Spełnia 3NF, nie ma zależności przechodnich.
 
 ### e. definicję kuczy obcych zapewniających integralność danych
 
-#### Klucze obce w bazie danych
+#### Tabela `room_assignments`:
 
-#### Tabela `employees`
+```
+CREATE TABLE room_assignments (
+    assignment_id INT IDENTITY PRIMARY KEY,
+    room_id INT NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id)
+);
+```
 
-- `employee_id` (INT): Klucz główny, identyfikator pracownika
+- Klucz obcy `room_id` w tabeli **room_assignments** odnosi się do klucza głównego `room_id` w tabeli **rooms**. Zapewnia to, że nie można dodać zadania przypisania do nieistniejącego pokoju.
 
-#### Tabela `students`
+---
 
-- `student_id` (INT): Klucz główny, identyfikator ucznia
+#### Tabela `courses_schedule`:
 
-#### Tabela `teachers_subjects`
+```
+CREATE TABLE courses_schedule (
+    course_id INT NOT NULL,
+    assignment_id INT NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+    FOREIGN KEY (assignment_id) REFERENCES room_assignments(assignment_id)
+);
 
-- `teacher_id` (INT): Klucz obcy do `employees.employee_id`
+```
 
-  - Opis: Klucz obcy łączący tabelę `teachers_subjects` z tabelą `employees`, wskazujący na identyfikator pracownika (nauczyciela).
+- Klucze obce `course_id` i `assignment_id` w tabeli **courses_schedule** odnoszą się odpowiednio do klucza głównego `course_id` w tabeli **courses** oraz klucza głównego `assignment_id` w tabeli **room_assignments**. To zapewnia, że każdy wpis w **courses_schedule** musi odnosić się do istniejącego kursu i przypisania pokoju.
 
-- `subject_id` (INT): Klucz obcy do `subjects.subject_id`
-  - Opis: Klucz obcy łączący tabelę `teachers_subjects` z tabelą `subjects`, wskazujący na identyfikator przedmiotu.
+---
+
+#### Tabela `student_courses`:
+
+```
+CREATE TABLE student_courses (
+    student_id INT NOT NULL,
+    course_id INT NOT NULL,
+    payment_date DATETIME NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id)
+);
+```
+
+- Klucze obce `student_id` i `course_id` w tabeli **student_courses** odnoszą się odpowiednio do klucza głównego `student_id` w tabeli **students** oraz klucza głównego `course_id` w tabeli **courses**. Zapewnia to, że każda rejestracja studenta na kurs musi odnosić się do istniejącego studenta i istniejącego kursu.
+
+---
+
+#### Tabela `teacher_salaries`:
+
+```
+CREATE TABLE teacher_salaries (
+    salary_id INT IDENTITY PRIMARY KEY,
+    teacher_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    payment_date DATE NOT NULL,
+    FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id)
+);
+```
+
+- Klucz obcy `teacher_id` w tabeli **teacher_salaries** odnosi się do klucza głównego `teacher_id` w tabeli **teachers**. Zapewnia to, że każda wypłata wynagrodzenia jest powiązana z istniejącym nauczycielem.
+
+---
+
+#### Tabela `group_subjects`:
+
+```
+CREATE TABLE group_subjects (
+    group_subject_id INT IDENTITY PRIMARY KEY,
+    group_id INT NOT NULL,
+    subject_id INT NOT NULL,
+    teacher_id INT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES groups(group_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id),
+    FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id)
+);
+
+```
+
+- Klucze obce `group_id`, `subject_id` i `teacher_id` w tabeli **group_subjects** odnoszą się odpowiednio do klucza głównego `group_id` w tabeli **groups**, klucza głównego `subject_id` w tabeli **subjects** oraz klucza głównego `teacher_id` w tabeli **teachers**. Zapewnia to, że każdy wpis w **group_subjects** jest powiązany z istniejącą grupą, przedmiotem i nauczycielem.
+
+---
+
+#### Tabela `group_subject_schedule`:
+
+```
+CREATE TABLE group_subject_schedule (
+    group_subject_id INT NOT NULL,
+    assignment_id INT NOT NULL,
+    FOREIGN KEY (group_subject_id) REFERENCES group_subjects(group_subject_id),
+    FOREIGN KEY (assignment_id) REFERENCES room_assignments(assignment_id)
+);
+```
+
+- Klucze obce `group_subject_id` i `assignment_id` w tabeli **group_subject_schedule** odnoszą się odpowiednio do klucza głównego `group_subject_id` w tabeli **group_subjects** oraz klucza głównego `assignment_id` w tabeli **room_assignments**. Zapewnia to, że każde przypisanie przedmiotu do grupy jest powiązane z istniejącym przypisaniem pokoju.
 
 ### f. implementację schematu danych z wykorzystaniem dowolnej technologii bazy danych
 
+#### Plik ddl.sql
+
+```
+CREATE TABLE rooms (
+    room_id INT IDENTITY PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+);
+
+CREATE TABLE room_assignments (
+    assignment_id INT IDENTITY PRIMARY KEY,
+    room_id INT NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id),
+);
+
+CREATE TABLE courses (
+    course_id INT IDENTITY PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+);
+
+CREATE TABLE courses_schedule (
+    course_id INT NOT NULL,
+    assignment_id INT NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+    FOREIGN KEY (assignment_id) REFERENCES room_assignments(assignment_id),
+);
+
+CREATE TABLE groups (
+    group_id INT IDENTITY PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+);
+
+CREATE TABLE students (
+    student_id INT IDENTITY PRIMARY KEY,
+    first_name VARCHAR(64) NOT NULL,
+    last_name VARCHAR(64) NOT NULL,
+    group_id INT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES groups(group_id),
+);
+
+CREATE TABLE student_courses (
+    student_id INT NOT NULL UNIQUE,
+    course_id INT NOT NULL,
+    payment_date DATETIME NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+);
+
+CREATE TABLE teachers (
+    teacher_id INT IDENTITY PRIMARY KEY,
+    first_name VARCHAR(64) NOT NULL,
+    last_name VARCHAR(64) NOT NULL,
+);
+
+CREATE TABLE teacher_salaries (
+    salary_id INT IDENTITY PRIMARY KEY,
+    teacher_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    payment_date DATE NOT NULL,
+    FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id),
+);
+
+CREATE TABLE subjects (
+    subject_id INT IDENTITY PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+);
+
+CREATE TABLE group_subjects (
+    group_subject_id INT IDENTITY PRIMARY KEY,
+    group_id INT NOT NULL,
+    subject_id INT NOT NULL,
+    teacher_id INT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES groups(group_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id),
+    FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id),
+);
+
+CREATE TABLE group_subject_schedule (
+    group_subject_id INT NOT NULL,
+    assignment_id INT NOT NULL,
+    FOREIGN KEY (group_subject_id) REFERENCES group_subjects(group_subject_id),
+    FOREIGN KEY (assignment_id) REFERENCES room_assignments(assignment_id),
+);
+
+```
+
+#### Plik triggers.sql
+
+```
+CREATE TRIGGER room_assignment_overlap
+ON room_assignments
+INSTEAD OF INSERT
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM room_assignments
+        INNER JOIN inserted
+        ON room_assignments.room_id = inserted.room_id
+        WHERE inserted.start_time < room_assignments.end_time
+        AND inserted.end_time > room_assignments.start_time
+    )
+    BEGIN
+        RAISERROR ('Room assignment overlaps with existing assignment', 16, 1);
+    END
+    ELSE
+    BEGIN
+        INSERT INTO room_assignments (room_id, start_time, end_time)
+        SELECT room_id, start_time, end_time FROM inserted;
+    END
+END;
+
+declare @room_id int;
+insert into rooms (name) values ('Room 101');
+set @room_id = SCOPE_IDENTITY();
+
+insert into room_assignments (room_id, start_time, end_time) values (@room_id, '2024-06-01 08:00:00', '2024-06-01 10:00:00');
+
+-- trying to create overlaping room assignment
+insert into room_assignments (room_id, start_time, end_time) values (@room_id, '2024-06-01 09:00:00', '2024-06-01 11:00:00');
+
+
+
+CREATE TRIGGER course_payment_availability
+ON student_courses
+INSTEAD OF INSERT
+AS
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM inserted
+        INNER JOIN courses
+        ON inserted.course_id = courses.course_id
+        WHERE GETDATE() < courses.start_date
+    )
+    BEGIN
+        RAISERROR ('Course is not available', 16, 1);
+    END
+    ELSE
+    BEGIN
+        INSERT INTO student_courses
+        SELECT * FROM inserted;
+    END
+END;
+
+declare @group_id int;
+declare @student_id int;
+declare @course_id int;
+
+insert into groups (name) values ('Group 1');
+set @group_id = SCOPE_IDENTITY();
+
+insert into students (first_name, last_name, group_id) values ('John', 'Doe', @group_id);
+set @student_id = SCOPE_IDENTITY();
+
+insert into courses (name, start_date, end_date, price) values ('Course 1', '2024-06-01', '2024-06-30', 1000);
+set @course_id = SCOPE_IDENTITY();
+
+-- trying to assign course to student before course start date
+
+insert into student_courses (student_id, course_id, payment_date) values (@student_id, @course_id, GETDATE());
+
+```
+
+#### Plik drop.sql
+
+```
+DROP TABLE IF EXISTS group_subject_schedule;
+DROP TABLE IF EXISTS group_subjects;
+DROP TABLE IF EXISTS subjects;
+DROP TABLE IF EXISTS student_courses;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS teacher_salaries;
+DROP TABLE IF EXISTS teachers;
+DROP TABLE IF EXISTS courses_schedule;
+DROP TABLE IF EXISTS courses;
+DROP TABLE IF EXISTS room_assignments;
+DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS rooms;
+
+DROP TRIGGER IF EXISTS room_assignment_overlap;
+DROP TRIGGER IF EXISTS course_payment_availability;
+```
+
 ### g. dokumentacje w postaci diagramu obejmującego komplet użytych elementów schematu sporządzonego narzędziem dostępnym w ramach wykorzystanej technologii
 
-<img src="https://i.imgur.com/DlYOERO.png" />
+<img src="https://i.imgur.com/xs6bidh.png" />
 
 ### h. kod SQL służący do wygenerowania opracowanego schematu bazy danych
+
+#### Plik ddl.sql
+
+```
+CREATE TABLE rooms (
+    room_id INT IDENTITY PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+);
+
+CREATE TABLE room_assignments (
+    assignment_id INT IDENTITY PRIMARY KEY,
+    room_id INT NOT NULL,
+    start_time DATETIME NOT NULL,
+    end_time DATETIME NOT NULL,
+    FOREIGN KEY (room_id) REFERENCES rooms(room_id),
+);
+
+CREATE TABLE courses (
+    course_id INT IDENTITY PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+);
+
+CREATE TABLE courses_schedule (
+    course_id INT NOT NULL,
+    assignment_id INT NOT NULL,
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+    FOREIGN KEY (assignment_id) REFERENCES room_assignments(assignment_id),
+);
+
+CREATE TABLE groups (
+    group_id INT IDENTITY PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+);
+
+CREATE TABLE students (
+    student_id INT IDENTITY PRIMARY KEY,
+    first_name VARCHAR(64) NOT NULL,
+    last_name VARCHAR(64) NOT NULL,
+    group_id INT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES groups(group_id),
+);
+
+CREATE TABLE student_courses (
+    student_id INT NOT NULL UNIQUE,
+    course_id INT NOT NULL,
+    payment_date DATETIME NOT NULL,
+    FOREIGN KEY (student_id) REFERENCES students(student_id),
+    FOREIGN KEY (course_id) REFERENCES courses(course_id),
+);
+
+CREATE TABLE teachers (
+    teacher_id INT IDENTITY PRIMARY KEY,
+    first_name VARCHAR(64) NOT NULL,
+    last_name VARCHAR(64) NOT NULL,
+);
+
+CREATE TABLE teacher_salaries (
+    salary_id INT IDENTITY PRIMARY KEY,
+    teacher_id INT NOT NULL,
+    amount DECIMAL(10,2) NOT NULL,
+    payment_date DATE NOT NULL,
+    FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id),
+);
+
+CREATE TABLE subjects (
+    subject_id INT IDENTITY PRIMARY KEY,
+    name VARCHAR(64) NOT NULL UNIQUE,
+);
+
+CREATE TABLE group_subjects (
+    group_subject_id INT IDENTITY PRIMARY KEY,
+    group_id INT NOT NULL,
+    subject_id INT NOT NULL,
+    teacher_id INT NOT NULL,
+    FOREIGN KEY (group_id) REFERENCES groups(group_id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(subject_id),
+    FOREIGN KEY (teacher_id) REFERENCES teachers(teacher_id),
+);
+
+CREATE TABLE group_subject_schedule (
+    group_subject_id INT NOT NULL,
+    assignment_id INT NOT NULL,
+    FOREIGN KEY (group_subject_id) REFERENCES group_subjects(group_subject_id),
+    FOREIGN KEY (assignment_id) REFERENCES room_assignments(assignment_id),
+);
+
+```
+
+#### Plik triggers.sql
+
+```
+CREATE TRIGGER room_assignment_overlap
+ON room_assignments
+INSTEAD OF INSERT
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM room_assignments
+        INNER JOIN inserted
+        ON room_assignments.room_id = inserted.room_id
+        WHERE inserted.start_time < room_assignments.end_time
+        AND inserted.end_time > room_assignments.start_time
+    )
+    BEGIN
+        RAISERROR ('Room assignment overlaps with existing assignment', 16, 1);
+    END
+    ELSE
+    BEGIN
+        INSERT INTO room_assignments (room_id, start_time, end_time)
+        SELECT room_id, start_time, end_time FROM inserted;
+    END
+END;
+
+declare @room_id int;
+insert into rooms (name) values ('Room 101');
+set @room_id = SCOPE_IDENTITY();
+
+insert into room_assignments (room_id, start_time, end_time) values (@room_id, '2024-06-01 08:00:00', '2024-06-01 10:00:00');
+
+-- trying to create overlaping room assignment
+insert into room_assignments (room_id, start_time, end_time) values (@room_id, '2024-06-01 09:00:00', '2024-06-01 11:00:00');
+
+
+
+CREATE TRIGGER course_payment_availability
+ON student_courses
+INSTEAD OF INSERT
+AS
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM inserted
+        INNER JOIN courses
+        ON inserted.course_id = courses.course_id
+        WHERE GETDATE() < courses.start_date
+    )
+    BEGIN
+        RAISERROR ('Course is not available', 16, 1);
+    END
+    ELSE
+    BEGIN
+        INSERT INTO student_courses
+        SELECT * FROM inserted;
+    END
+END;
+
+declare @group_id int;
+declare @student_id int;
+declare @course_id int;
+
+insert into groups (name) values ('Group 1');
+set @group_id = SCOPE_IDENTITY();
+
+insert into students (first_name, last_name, group_id) values ('John', 'Doe', @group_id);
+set @student_id = SCOPE_IDENTITY();
+
+insert into courses (name, start_date, end_date, price) values ('Course 1', '2024-06-01', '2024-06-30', 1000);
+set @course_id = SCOPE_IDENTITY();
+
+-- trying to assign course to student before course start date
+
+insert into student_courses (student_id, course_id, payment_date) values (@student_id, @course_id, GETDATE());
+
+```
+
+#### Plik drop.sql
+
+```
+DROP TABLE IF EXISTS group_subject_schedule;
+DROP TABLE IF EXISTS group_subjects;
+DROP TABLE IF EXISTS subjects;
+DROP TABLE IF EXISTS student_courses;
+DROP TABLE IF EXISTS students;
+DROP TABLE IF EXISTS teacher_salaries;
+DROP TABLE IF EXISTS teachers;
+DROP TABLE IF EXISTS courses_schedule;
+DROP TABLE IF EXISTS courses;
+DROP TABLE IF EXISTS room_assignments;
+DROP TABLE IF EXISTS groups;
+DROP TABLE IF EXISTS rooms;
+
+DROP TRIGGER IF EXISTS room_assignment_overlap;
+DROP TRIGGER IF EXISTS course_payment_availability;
+```
 
 ### i. kod SQL służący do wprowadzenia przykładowych danych do poszczególnych tabel systemu.
 
 ```
-INSERT INTO employees (employee_id, first_name, last_name, subjects)
+INSERT INTO rooms (room_id, name)
 VALUES
-    (1, 'John', 'Doe', 'Mathematics'),
-    (2, 'Jane', 'Smith', 'Science'),
-    (3, 'Michael', 'Johnson', 'History'),
-    (4, 'Emily', 'Williams', 'Literature');
+    (1, 'Room A'),
+    (2, 'Room B'),
+    (3, 'Room C');
 
-INSERT INTO students (student_id, first_name, last_name, section, class)
+INSERT INTO room_assignments (assignment_id, room_id, start_time, end_time)
 VALUES
-    (1, 'Mark', 'Brown', 'A', '10A'),
-    (2, 'Sarah', 'Wilson', 'B', '11B'),
-    (3, 'David', 'Lee', 'A', '9A'),
-    (4, 'Anna', 'Moore', 'C', '12C');
+    (1, 1, '2024-06-01 09:00:00', '2024-06-01 11:00:00'),
+    (2, 1, '2024-06-02 14:00:00', '2024-06-02 16:00:00'),
+    (3, 2, '2024-06-01 10:00:00', '2024-06-01 12:00:00'),
+    (4, 2, '2024-06-02 13:00:00', '2024-06-02 15:00:00'),
+    (5, 3, '2024-06-01 11:00:00', '2024-06-01 13:00:00'),
+    (6, 3, '2024-06-02 12:00:00', '2024-06-02 14:00:00');
 
-INSERT INTO sections (section_id, name)
+
+INSERT INTO courses (course_id, name, start_date, end_date, price)
 VALUES
-    (1, 'A'),
-    (2, 'B'),
-    (3, 'C');
+    (1, 'Mathematics 101', '2024-07-01', '2024-08-30', 500.00),
+    (2, 'Physics 201', '2024-07-15', '2024-09-15', 600.00),
+    (3, 'History 301', '2024-08-01', '2024-09-30', 450.00);
+
+
+INSERT INTO courses_schedule (course_id, assignment_id)
+VALUES
+    (1, 1),
+    (1, 2),
+    (2, 3),
+    (2, 4),
+    (3, 5),
+    (3, 6);
+
+INSERT INTO groups (group_id, name)
+VALUES
+    (1, 'Group 1'),
+    (2, 'Group 2'),
+    (3, 'Group 3');
+
+
+INSERT INTO students (student_id, first_name, last_name, group_id)
+VALUES
+    (1, 'John', 'Doe', 1),
+    (2, 'Jane', 'Smith', 2),
+    (3, 'Michael', 'Johnson', 3),
+    (4, 'Emily', 'Brown', 1),
+    (5, 'William', 'Davis', 2);
+
+
+INSERT INTO student_courses (student_id, course_id, payment_date)
+VALUES
+    (1, 1, '2024-06-01'),
+    (2, 1, '2024-06-02'),
+    (3, 2, '2024-06-03'),
+    (4, 2, '2024-06-04'),
+    (5, 3, '2024-06-05');
+
+
+INSERT INTO teachers (teacher_id, first_name, last_name)
+VALUES
+    (1, 'David', 'Wilson'),
+    (2, 'Sarah', 'Anderson'),
+    (3, 'James', 'Martinez');
+
+
+INSERT INTO teacher_salaries (salary_id, teacher_id, amount, payment_date)
+VALUES
+    (1, 1, 2500.00, '2024-06-15'),
+    (2, 2, 2800.00, '2024-06-15'),
+    (3, 3, 2700.00, '2024-06-15');
+
 
 INSERT INTO subjects (subject_id, name)
 VALUES
     (1, 'Mathematics'),
-    (2, 'Science'),
-    (3, 'History'),
-    (4, 'Literature');
+    (2, 'Physics'),
+    (3, 'History');
 
-INSERT INTO teachers_subjects (teacher_id, subject_id)
+
+INSERT INTO group_subjects (group_subject_id, group_id, subject_id, teacher_id)
 VALUES
-    (1, 1), -- John Doe teaches Mathematics
-    (2, 2), -- Jane Smith teaches Science
-    (3, 3), -- Michael Johnson teaches History
-    (4, 4); -- Emily Williams teaches Literature
+    (1, 1, 1, 1),
+    (2, 2, 2, 2),
+    (3, 3, 3, 3),
+    (4, 1, 2, 1),
+    (5, 2, 3, 2),
+    (6, 3, 1, 3);
 
-INSERT INTO fees (fee_id, student_id, amount, due_date)
+
+INSERT INTO group_subject_schedule (group_subject_id, assignment_id)
 VALUES
-    (1, 1, 500.00, '2024-06-30'),
-    (2, 2, 600.00, '2024-07-15'),
-    (3, 3, 550.00, '2024-07-10'),
-    (4, 4, 700.00, '2024-07-05');
-
-INSERT INTO salaries (salary_id, employee_id, amount, payment_date)
-VALUES
-    (1, 1, 4000.00, '2024-06-25'),
-    (2, 2, 4500.00, '2024-06-30'),
-    (3, 3, 4200.00, '2024-06-28'),
-    (4, 4, 4300.00, '2024-06-27');
-
-INSERT INTO rooms (room_id, name)
-VALUES
-    (1, 'Room 101'),
-    (2, 'Room 102'),
-    (3, 'Room 103');
-
-INSERT INTO classes (class_id, subject_id, teacher_id, room_id, schedule)
-VALUES
-    (1, 1, 1, 1, '2024-07-01 08:00:00'), -- Mathematics class by John Doe in Room 101
-    (2, 2, 2, 2, '2024-07-02 09:30:00'), -- Science class by Jane Smith in Room 102
-    (3, 3, 3, 3, '2024-07-03 10:45:00'), -- History class by Michael Johnson in Room 103
-    (4, 4, 4, 1, '2024-07-04 12:00:00'); -- Literature class by Emily Williams in Room 101
-
+    (1, 1),
+    (2, 2),
+    (3, 3),
+    (4, 4),
+    (5, 5),
+    (6, 6);
 ```
 
 Uwaga:
