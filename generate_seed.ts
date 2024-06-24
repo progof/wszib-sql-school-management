@@ -379,11 +379,11 @@ function getInsertGroupSubjectSQL(groupSubject: GroupSubject) {
 }
 
 function getInsertGroupSubjectScheduleSQL(schedule: GroupSubjectSchedule) {
-	return `INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (${schedule.group_subject_id}, ${schedule.assignment_id});`;
+	return `INSERT INTO group_subject_schedule (group_subject_id, assignment_id) VALUES (${schedule.group_subject_id}, ${schedule.assignment_id});`;
 }
 
 const tables = [
-	"group_subject_schedules",
+	"group_subject_schedule",
 	"group_subjects",
 	"subjects",
 	"teacher_salaries",
