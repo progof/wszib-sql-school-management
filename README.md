@@ -8,6 +8,8 @@
 ## 1. Wykaz tematów umieszczono w 'Materiałach dydaktycznych' (w tym miejscu nie ma możliwości dołączenia pliku)
 
 ```
+Projekt nr. 14
+
 Cele projektu: zaprojektuj bazę danych do przechowywania informacji o pracownikach szkoły i uczniach spełniających następujące właściwości:
 
 1. Pracownicy będą mieli swój identyfikator, imię i nazwisko oraz zajęcia, które prowadzą.
@@ -51,7 +53,15 @@ Projektowana baza danych ma na celu zarządzanie informacjami dotyczącymi praco
 
 ### b. dokumentację przypadków użycia (np. diagramy UML use case):
 
-#### Soon...
+#### **USE CASE:** Student nabywa dostęp do kursu, natomiast administrator dodaje lekcje do danego kursu:
+
+<img src="https://i.imgur.com/SLGCq7x.png" />
+
+---
+
+#### **USE CASE:** Administrator wypłaca pensje wykładowcy, a wykładowca sprawdza swoje wynagrodzenie.
+
+<img src="https://i.imgur.com/NGQQeCJ.png" />
 
 ### c. dokumentację (modelu fizycznego) schematu bazy danych z wykorzystaniem dowolnej notacji, z wyraźnym określeniem wszelkich niezbędnych kluczy głównych
 
@@ -277,7 +287,7 @@ Projektowana baza danych ma na celu zarządzanie informacjami dotyczącymi praco
 
 #### Tabela `room_assignments`:
 
-```
+```sql
 CREATE TABLE room_assignments (
     assignment_id INT IDENTITY PRIMARY KEY,
     room_id INT NOT NULL,
@@ -293,7 +303,7 @@ CREATE TABLE room_assignments (
 
 #### Tabela `courses_schedule`:
 
-```
+```sql
 CREATE TABLE courses_schedule (
     course_id INT NOT NULL,
     assignment_id INT NOT NULL,
@@ -309,7 +319,7 @@ CREATE TABLE courses_schedule (
 
 #### Tabela `student_courses`:
 
-```
+```sql
 CREATE TABLE student_courses (
     student_id INT NOT NULL,
     course_id INT NOT NULL,
@@ -325,7 +335,7 @@ CREATE TABLE student_courses (
 
 #### Tabela `teacher_salaries`:
 
-```
+```sql
 CREATE TABLE teacher_salaries (
     salary_id INT IDENTITY PRIMARY KEY,
     teacher_id INT NOT NULL,
@@ -341,7 +351,7 @@ CREATE TABLE teacher_salaries (
 
 #### Tabela `group_subjects`:
 
-```
+```sql
 CREATE TABLE group_subjects (
     group_subject_id INT IDENTITY PRIMARY KEY,
     group_id INT NOT NULL,
@@ -360,7 +370,7 @@ CREATE TABLE group_subjects (
 
 #### Tabela `group_subject_schedule`:
 
-```
+```sql
 CREATE TABLE group_subject_schedule (
     group_subject_id INT NOT NULL,
     assignment_id INT NOT NULL,
