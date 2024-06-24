@@ -1,96 +1,419 @@
-INSERT INTO rooms (room_id, name)
-VALUES
-    (1, 'Room A'),
-    (2, 'Room B'),
-    (3, 'Room C');
+DELETE FROM group_subject_schedules;
+DELETE FROM group_subjects;
+DELETE FROM subjects;
+DELETE FROM teacher_salaries;
+DELETE FROM teachers;
+DELETE FROM student_courses;
+DELETE FROM students;
+DELETE FROM groups;
+DELETE FROM course_schedules;
+DELETE FROM courses;
+DELETE FROM room_assignments;
+DELETE FROM rooms;
 
-INSERT INTO room_assignments (assignment_id, room_id, start_time, end_time)
-VALUES
-    (1, 1, '2024-06-01 09:00:00', '2024-06-01 11:00:00'),
-    (2, 1, '2024-06-02 14:00:00', '2024-06-02 16:00:00'),
-    (3, 2, '2024-06-01 10:00:00', '2024-06-01 12:00:00'),
-    (4, 2, '2024-06-02 13:00:00', '2024-06-02 15:00:00'),
-    (5, 3, '2024-06-01 11:00:00', '2024-06-01 13:00:00'),
-    (6, 3, '2024-06-02 12:00:00', '2024-06-02 14:00:00');
+INSERT INTO rooms (name) VALUES ('K204');
+INSERT INTO rooms (name) VALUES ('K205');
+INSERT INTO rooms (name) VALUES ('K206');
+INSERT INTO rooms (name) VALUES ('K207');
+INSERT INTO rooms (name) VALUES ('K305');
+INSERT INTO rooms (name) VALUES ('K306');
+INSERT INTO rooms (name) VALUES ('K307');
+INSERT INTO rooms (name) VALUES ('K409');
+INSERT INTO rooms (name) VALUES ('K410');
 
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (4, '2024-02-01T08:00:00.000Z', '2024-02-01T09:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (5, '2024-02-01T08:00:00.000Z', '2024-02-01T08:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (6, '2024-02-01T08:00:00.000Z', '2024-02-01T09:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (7, '2024-02-01T08:00:00.000Z', '2024-02-01T09:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (9, '2024-02-01T08:00:00.000Z', '2024-02-01T09:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T08:15:00.000Z', '2024-02-01T09:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (2, '2024-02-01T08:15:00.000Z', '2024-02-01T09:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (8, '2024-02-01T08:15:00.000Z', '2024-02-01T09:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T08:30:00.000Z', '2024-02-01T09:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (5, '2024-02-01T08:45:00.000Z', '2024-02-01T09:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T09:00:00.000Z', '2024-02-01T09:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T09:15:00.000Z', '2024-02-01T10:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (4, '2024-02-01T09:30:00.000Z', '2024-02-01T10:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (5, '2024-02-01T09:30:00.000Z', '2024-02-01T11:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (6, '2024-02-01T09:30:00.000Z', '2024-02-01T10:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (7, '2024-02-01T09:30:00.000Z', '2024-02-01T11:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (9, '2024-02-01T09:30:00.000Z', '2024-02-01T10:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T09:45:00.000Z', '2024-02-01T10:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (2, '2024-02-01T09:45:00.000Z', '2024-02-01T11:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (8, '2024-02-01T10:00:00.000Z', '2024-02-01T11:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (4, '2024-02-01T10:15:00.000Z', '2024-02-01T11:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T10:30:00.000Z', '2024-02-01T11:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T10:45:00.000Z', '2024-02-01T11:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (4, '2024-02-01T11:00:00.000Z', '2024-02-01T11:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (9, '2024-02-01T11:00:00.000Z', '2024-02-01T11:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (5, '2024-02-01T11:15:00.000Z', '2024-02-01T12:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T11:30:00.000Z', '2024-02-01T12:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (8, '2024-02-01T11:30:00.000Z', '2024-02-01T12:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (2, '2024-02-01T11:45:00.000Z', '2024-02-01T12:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (4, '2024-02-01T11:45:00.000Z', '2024-02-01T13:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (7, '2024-02-01T11:45:00.000Z', '2024-02-01T13:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (9, '2024-02-01T11:45:00.000Z', '2024-02-01T13:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T12:00:00.000Z', '2024-02-01T12:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T12:15:00.000Z', '2024-02-01T13:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (8, '2024-02-01T12:15:00.000Z', '2024-02-01T13:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T12:45:00.000Z', '2024-02-01T13:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (2, '2024-02-01T12:45:00.000Z', '2024-02-01T13:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (5, '2024-02-01T12:45:00.000Z', '2024-02-01T13:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (6, '2024-02-01T12:45:00.000Z', '2024-02-01T14:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (4, '2024-02-01T13:15:00.000Z', '2024-02-01T14:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (7, '2024-02-01T13:15:00.000Z', '2024-02-01T14:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (9, '2024-02-01T13:15:00.000Z', '2024-02-01T14:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T13:30:00.000Z', '2024-02-01T14:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (5, '2024-02-01T13:30:00.000Z', '2024-02-01T15:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (2, '2024-02-01T13:45:00.000Z', '2024-02-01T15:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (8, '2024-02-01T13:45:00.000Z', '2024-02-01T14:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T14:15:00.000Z', '2024-02-01T15:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (6, '2024-02-01T14:15:00.000Z', '2024-02-01T15:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T14:30:00.000Z', '2024-02-01T16:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (8, '2024-02-01T14:30:00.000Z', '2024-02-01T15:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (4, '2024-02-01T14:45:00.000Z', '2024-02-01T16:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (7, '2024-02-01T14:45:00.000Z', '2024-02-01T15:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (9, '2024-02-01T14:45:00.000Z', '2024-02-01T16:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T15:00:00.000Z', '2024-02-01T16:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (5, '2024-02-01T15:00:00.000Z', '2024-02-01T16:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (2, '2024-02-01T15:15:00.000Z', '2024-02-01T16:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (8, '2024-02-01T15:15:00.000Z', '2024-02-01T16:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (6, '2024-02-01T15:30:00.000Z', '2024-02-01T17:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (7, '2024-02-01T15:30:00.000Z', '2024-02-01T17:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T16:00:00.000Z', '2024-02-01T17:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (9, '2024-02-01T16:15:00.000Z', '2024-02-01T17:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T16:30:00.000Z', '2024-02-01T18:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (5, '2024-02-01T16:30:00.000Z', '2024-02-01T17:15:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (8, '2024-02-01T16:45:00.000Z', '2024-02-01T17:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (7, '2024-02-01T17:00:00.000Z', '2024-02-01T18:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (2, '2024-02-01T17:30:00.000Z', '2024-02-01T19:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T17:30:00.000Z', '2024-02-01T19:00:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (4, '2024-02-01T17:45:00.000Z', '2024-02-01T18:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (6, '2024-02-01T17:45:00.000Z', '2024-02-01T18:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (9, '2024-02-01T17:45:00.000Z', '2024-02-01T19:15:00.000Z');
 
-INSERT INTO courses (course_id, name, start_date, end_date, price)
-VALUES
-    (1, 'Mathematics 101', '2024-07-01', '2024-08-30', 500.00),
-    (2, 'Physics 201', '2024-07-15', '2024-09-15', 600.00),
-    (3, 'History 301', '2024-08-01', '2024-09-30', 450.00);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Mathematics', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 136);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Physics', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 136);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Chemistry', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 565);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Biology', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 349);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('History', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 733);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Geography', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 537);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('English', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 922);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('French', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 394);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Spanish', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 640);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('German', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 951);
 
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (7, 26);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (7, 42);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (2, 48);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (4, 63);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (5, 11);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (6, 19);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (5, 36);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (9, 49);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (3, 12);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (2, 56);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (3, 37);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (3, 30);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (2, 50);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (1, 66);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (4, 22);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (6, 58);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (9, 44);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (8, 31);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (1, 51);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (6, 67);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (8, 39);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (8, 15);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (10, 23);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (10, 32);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (2, 68);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (10, 9);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (7, 40);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (1, 16);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (10, 61);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (1, 46);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (4, 53);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (4, 24);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (10, 69);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (6, 10);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (2, 54);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (3, 17);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (2, 25);
+INSERT INTO course_schedules (course_id, assignment_id) VALUES (8, 70);
 
-INSERT INTO courses_schedule (course_id, assignment_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (2, 3),
-    (2, 4),
-    (3, 5),
-    (3, 6);
+INSERT INTO groups (name) VALUES ('A');
+INSERT INTO groups (name) VALUES ('B');
+INSERT INTO groups (name) VALUES ('C');
+INSERT INTO groups (name) VALUES ('D');
 
-INSERT INTO groups (group_id, name)
-VALUES
-    (1, 'Group 1'),
-    (2, 'Group 2'),
-    (3, 'Group 3');
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Chris', 'Hoeger', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Levi', 'Abernathy', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Avery', 'Rowe', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Simone', 'Rohan', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Cora', 'O''Kon', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Verdie', 'Schultz', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Kelley', 'Nitzsche', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Haley', 'Jones', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Sean', 'McKenzie', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Edwina', 'Blick', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Missouri', 'Nader', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Lela', 'Brakus', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Giles', 'Bauch', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Dwight', 'Treutel', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Percy', 'Klein', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Andrew', 'Dickens', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Yasmine', 'McLaughlin', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Torrey', 'Cronin', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Daija', 'Koelpin', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Grady', 'Schulist', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Marquise', 'O''Reilly', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Baylee', 'Schamberger', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Marian', 'Wiza', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Heath', 'Towne', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Julio', 'Hermann', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Lelia', 'Balistreri', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Marcella', 'Batz', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Hollis', 'Price', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Augustus', 'Treutel', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Cleo', 'Klocko-Jast', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('May', 'Morissette', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Jerome', 'Hansen', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Wayne', 'Stracke', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Colleen', 'Johnson', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Cali', 'Macejkovic', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Alberto', 'Wehner', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Kali', 'Schuster', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Mikayla', 'Kemmer', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Leon', 'Crona', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Adele', 'Langworth', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Vergie', 'Mosciski', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Sigmund', 'Murazik', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Allen', 'Nolan', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Jody', 'White', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Shana', 'Berge', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Ted', 'Flatley', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Myah', 'Koch', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Bennett', 'Russel', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Alysa', 'MacGyver', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Vicenta', 'O''Reilly', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Tristin', 'Homenick', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Rodger', 'Klein', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Dashawn', 'Kihn', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Lori', 'Senger', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Larry', 'Cartwright', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Broderick', 'Mayer', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Miller', 'Vandervort', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Audra', 'Conroy', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Jaime', 'McLaughlin', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Gerry', 'Cronin', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Darryl', 'Howe', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Yvonne', 'Daniel', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Tiffany', 'Paucek', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Lucienne', 'Cormier', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Kim', 'Cremin', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Beulah', 'Considine', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Ahmad', 'Schumm', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Rosendo', 'Bednar', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Adriel', 'Howell', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Georgette', 'Deckow', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Brock', 'Lang', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Liza', 'Emard', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Frances', 'Russel', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Hollis', 'Erdman', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Anais', 'Turner-Pacocha', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Hulda', 'Cummings', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Evan', 'Sanford-Macejkovic', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Stefan', 'Stanton', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Adelbert', 'Hauck', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Major', 'O''Keefe', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Henri', 'Stark', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Josiah', 'Littel', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Ines', 'Beer', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Maye', 'Hessel-Casper', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Michel', 'Barton', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Matteo', 'Hudson', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Myles', 'Lemke', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Jovan', 'Schuppe', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Kris', 'Abshire', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Melissa', 'Kshlerin', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Kaylee', 'Fisher', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Gladyce', 'Hilpert', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Wendy', 'Little', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Trace', 'Bauch', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Kayley', 'Fay', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Erika', 'Wisoky', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Anabelle', 'Farrell', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Frankie', 'Rowe', 4);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Ada', 'Nikolaus', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Maureen', 'Herman', 4);
 
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (1, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (2, 6, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (3, 5, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (4, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (6, 7, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (7, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (8, 9, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (9, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (11, 10, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (12, 5, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (13, 5, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (14, 5, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (15, 5, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (18, 7, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (19, 4, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (20, 3, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (21, 4, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (22, 9, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (23, 5, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (24, 6, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (25, 4, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (27, 3, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (28, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (29, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (32, 2, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (35, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (37, 9, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (39, 9, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (40, 9, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (41, 6, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (44, 7, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (45, 5, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (47, 10, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (48, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (49, 10, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (50, 9, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (54, 2, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (58, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (60, 6, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (63, 10, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (65, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (68, 3, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (69, 10, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (70, 3, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (71, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (74, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (75, 6, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (76, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (77, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (80, 9, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (82, 4, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (83, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (84, 6, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (87, 7, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (88, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (89, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (91, 10, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (92, 10, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (93, 4, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (97, 5, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (98, 3, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (99, 5, '2024-02-01T00:00:00.000Z');
 
-INSERT INTO students (student_id, first_name, last_name, group_id)
-VALUES
-    (1, 'John', 'Doe', 1),
-    (2, 'Jane', 'Smith', 2),
-    (3, 'Michael', 'Johnson', 3),
-    (4, 'Emily', 'Brown', 1),
-    (5, 'William', 'Davis', 2);
+INSERT INTO teachers (first_name, last_name) VALUES ('Maegan', 'Paucek');
+INSERT INTO teachers (first_name, last_name) VALUES ('Mary', 'Mohr');
+INSERT INTO teachers (first_name, last_name) VALUES ('Noemie', 'O''Kon');
+INSERT INTO teachers (first_name, last_name) VALUES ('Rebekah', 'Marks-Luettgen');
+INSERT INTO teachers (first_name, last_name) VALUES ('Kay', 'Ryan');
+INSERT INTO teachers (first_name, last_name) VALUES ('Eleonore', 'Hagenes');
+INSERT INTO teachers (first_name, last_name) VALUES ('Zackery', 'O''Hara');
+INSERT INTO teachers (first_name, last_name) VALUES ('Giovanny', 'Greenholt');
+INSERT INTO teachers (first_name, last_name) VALUES ('Elva', 'Nolan');
+INSERT INTO teachers (first_name, last_name) VALUES ('Conor', 'Hilll');
 
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (1, 3306, '2024-02-23T17:38:47.104Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (2, 3837, '2024-02-04T12:44:37.051Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (3, 1558, '2024-02-09T01:37:40.398Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (4, 3407, '2024-02-29T01:42:52.539Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (5, 2783, '2024-02-06T04:09:38.441Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (6, 4989, '2024-02-24T01:23:03.273Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (7, 2852, '2024-02-06T00:46:04.660Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (8, 1949, '2024-02-20T17:28:32.118Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (9, 1707, '2024-02-24T01:27:24.254Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (10, 2505, '2024-02-05T16:52:08.635Z');
 
-INSERT INTO student_courses (student_id, course_id, payment_date)
-VALUES
-    (1, 1, '2024-06-01'),
-    (2, 1, '2024-06-02'),
-    (3, 2, '2024-06-03'),
-    (4, 2, '2024-06-04'),
-    (5, 3, '2024-06-05');
+INSERT INTO subjects (name) VALUES ('Mathematics');
+INSERT INTO subjects (name) VALUES ('Physics');
+INSERT INTO subjects (name) VALUES ('Chemistry');
+INSERT INTO subjects (name) VALUES ('Biology');
+INSERT INTO subjects (name) VALUES ('History');
+INSERT INTO subjects (name) VALUES ('Geography');
+INSERT INTO subjects (name) VALUES ('English');
+INSERT INTO subjects (name) VALUES ('French');
+INSERT INTO subjects (name) VALUES ('Spanish');
+INSERT INTO subjects (name) VALUES ('German');
 
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 1, 9);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 2, 10);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 3, 7);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 4, 1);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 5, 6);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 6, 3);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 7, 3);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 8, 1);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 9, 6);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 10, 7);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 1, 2);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 2, 5);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 3, 8);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 4, 2);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 5, 5);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 6, 9);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 7, 3);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 8, 9);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 9, 2);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (2, 10, 1);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 1, 5);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 2, 1);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 3, 4);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 4, 7);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 5, 5);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 6, 8);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 7, 4);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 8, 2);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 9, 7);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (3, 10, 6);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 1, 3);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 2, 8);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 3, 9);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 4, 3);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 5, 8);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 6, 9);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 7, 7);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 8, 7);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 9, 2);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (4, 10, 5);
 
-INSERT INTO teachers (teacher_id, first_name, last_name)
-VALUES
-    (1, 'David', 'Wilson'),
-    (2, 'Sarah', 'Anderson'),
-    (3, 'James', 'Martinez');
-
-
-INSERT INTO teacher_salaries (salary_id, teacher_id, amount, payment_date)
-VALUES
-    (1, 1, 2500.00, '2024-06-15'),
-    (2, 2, 2800.00, '2024-06-15'),
-    (3, 3, 2700.00, '2024-06-15');
-
-
-INSERT INTO subjects (subject_id, name)
-VALUES
-    (1, 'Mathematics'),
-    (2, 'Physics'),
-    (3, 'History');
-
-
-INSERT INTO group_subjects (group_subject_id, group_id, subject_id, teacher_id)
-VALUES
-    (1, 1, 1, 1),
-    (2, 2, 2, 2),
-    (3, 3, 3, 3),
-    (4, 1, 2, 1),
-    (5, 2, 3, 2),
-    (6, 3, 1, 3);
-
-
-INSERT INTO group_subject_schedule (group_subject_id, assignment_id)
-VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5),
-    (6, 6);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (27, 34);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (2, 1);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (1, 55);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (16, 18);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (6, 35);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (31, 2);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (17, 27);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (12, 43);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (13, 64);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (2, 3);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (39, 28);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (14, 4);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (13, 20);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (1, 29);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (28, 65);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (35, 21);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (8, 57);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (26, 13);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (10, 5);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (35, 6);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (39, 14);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (27, 38);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (33, 7);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (33, 59);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (6, 8);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (14, 45);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (31, 60);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (12, 52);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (20, 41);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (18, 62);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (34, 33);
+INSERT INTO group_subject_schedules (group_subject_id, assignment_id) VALUES (10, 47);
