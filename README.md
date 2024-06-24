@@ -375,7 +375,7 @@ CREATE TABLE group_subject_schedule (
 
 #### Plik ddl.sql
 
-```
+```sql
 CREATE TABLE rooms (
     room_id INT IDENTITY PRIMARY KEY,
     name VARCHAR(64) NOT NULL UNIQUE,
@@ -465,7 +465,7 @@ CREATE TABLE group_subject_schedule (
 
 #### Plik triggers.sql
 
-```
+```sql
 CREATE TRIGGER room_assignment_overlap
 ON room_assignments
 INSTEAD OF INSERT
@@ -543,7 +543,7 @@ insert into student_courses (student_id, course_id, payment_date) values (@stude
 
 #### Plik drop.sql
 
-```
+```sql
 DROP TABLE IF EXISTS group_subject_schedule;
 DROP TABLE IF EXISTS group_subjects;
 DROP TABLE IF EXISTS subjects;
@@ -569,7 +569,7 @@ DROP TRIGGER IF EXISTS course_payment_availability;
 
 #### Plik ddl.sql
 
-```
+```sql
 CREATE TABLE rooms (
     room_id INT IDENTITY PRIMARY KEY,
     name VARCHAR(64) NOT NULL UNIQUE,
@@ -659,7 +659,7 @@ CREATE TABLE group_subject_schedule (
 
 #### Plik triggers.sql
 
-```
+```sql
 CREATE TRIGGER room_assignment_overlap
 ON room_assignments
 INSTEAD OF INSERT
@@ -737,7 +737,7 @@ insert into student_courses (student_id, course_id, payment_date) values (@stude
 
 #### Plik drop.sql
 
-```
+```sql
 DROP TABLE IF EXISTS group_subject_schedule;
 DROP TABLE IF EXISTS group_subjects;
 DROP TABLE IF EXISTS subjects;
@@ -757,7 +757,7 @@ DROP TRIGGER IF EXISTS course_payment_availability;
 
 ### i. kod SQL służący do wprowadzenia przykładowych danych do poszczególnych tabel systemu.
 
-```
+```sql
 INSERT INTO rooms (room_id, name)
 VALUES
     (1, 'Room A'),
