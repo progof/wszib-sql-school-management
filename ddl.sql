@@ -1,3 +1,5 @@
+use ortynsky
+
 CREATE TABLE rooms (
     room_id INT IDENTITY PRIMARY KEY,
     name VARCHAR(64) NOT NULL UNIQUE,

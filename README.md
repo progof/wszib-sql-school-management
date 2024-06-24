@@ -768,106 +768,94 @@ DROP TRIGGER IF EXISTS course_payment_availability;
 ### i. kod SQL służący do wprowadzenia przykładowych danych do poszczególnych tabel systemu.
 
 ```sql
-INSERT INTO rooms (room_id, name)
-VALUES
-    (1, 'Room A'),
-    (2, 'Room B'),
-    (3, 'Room C');
+DELETE FROM group_subject_schedule;
+DELETE FROM group_subjects;
+DELETE FROM subjects;
+DELETE FROM teacher_salaries;
+DELETE FROM teachers;
+DELETE FROM student_courses;
+DELETE FROM students;
+DELETE FROM groups;
+DELETE FROM courses_schedule;
+DELETE FROM courses;
+DELETE FROM room_assignments;
+DELETE FROM rooms;
 
-INSERT INTO room_assignments (assignment_id, room_id, start_time, end_time)
-VALUES
-    (1, 1, '2024-06-01 09:00:00', '2024-06-01 11:00:00'),
-    (2, 1, '2024-06-02 14:00:00', '2024-06-02 16:00:00'),
-    (3, 2, '2024-06-01 10:00:00', '2024-06-01 12:00:00'),
-    (4, 2, '2024-06-02 13:00:00', '2024-06-02 15:00:00'),
-    (5, 3, '2024-06-01 11:00:00', '2024-06-01 13:00:00'),
-    (6, 3, '2024-06-02 12:00:00', '2024-06-02 14:00:00');
+INSERT INTO rooms (name) VALUES ('K204');
+INSERT INTO rooms (name) VALUES ('K205');
+INSERT INTO rooms (name) VALUES ('K206');
+INSERT INTO rooms (name) VALUES ('K207');
+INSERT INTO rooms (name) VALUES ('K305');
+INSERT INTO rooms (name) VALUES ('K306');
+INSERT INTO rooms (name) VALUES ('K307');
+INSERT INTO rooms (name) VALUES ('K409');
 
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (1, '2024-02-01T08:00:00.000Z', '2024-02-01T08:45:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (2, '2024-02-01T08:00:00.000Z', '2024-02-01T09:30:00.000Z');
+INSERT INTO room_assignments (room_id, start_time, end_time) VALUES (3, '2024-02-01T08:00:00.000Z', '2024-02-01T09:30:00.000Z');
 
-INSERT INTO courses (course_id, name, start_date, end_date, price)
-VALUES
-    (1, 'Mathematics 101', '2024-07-01', '2024-08-30', 500.00),
-    (2, 'Physics 201', '2024-07-15', '2024-09-15', 600.00),
-    (3, 'History 301', '2024-08-01', '2024-09-30', 450.00);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Mathematics', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 670);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Physics', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 223);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Chemistry', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 430);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('Biology', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 795);
+INSERT INTO courses (name, start_date, end_date, price) VALUES ('History', '2024-02-01T00:00:00.000Z', '2024-03-02T00:00:00.000Z', 204);
 
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (7, 10);
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (6, 16);
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (6, 25);
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (9, 32);
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (4, 54);
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (4, 40);
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (5, 11);
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (8, 26);
+INSERT INTO courses_schedule (course_id, assignment_id) VALUES (8, 33);
 
-INSERT INTO courses_schedule (course_id, assignment_id)
-VALUES
-    (1, 1),
-    (1, 2),
-    (2, 3),
-    (2, 4),
-    (3, 5),
-    (3, 6);
+INSERT INTO groups (name) VALUES ('A');
+INSERT INTO groups (name) VALUES ('B');
+INSERT INTO groups (name) VALUES ('C');
+INSERT INTO groups (name) VALUES ('D');
 
-INSERT INTO groups (group_id, name)
-VALUES
-    (1, 'Group 1'),
-    (2, 'Group 2'),
-    (3, 'Group 3');
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Amir', 'Sipes', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Omer', 'Kutch', 2);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Jacey', 'Reynolds', 3);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Buster', 'Skiles', 1);
+INSERT INTO students (first_name, last_name, group_id) VALUES ('Violet', 'White', 1);
 
-
-INSERT INTO students (student_id, first_name, last_name, group_id)
-VALUES
-    (1, 'John', 'Doe', 1),
-    (2, 'Jane', 'Smith', 2),
-    (3, 'Michael', 'Johnson', 3),
-    (4, 'Emily', 'Brown', 1),
-    (5, 'William', 'Davis', 2);
-
-
-INSERT INTO student_courses (student_id, course_id, payment_date)
-VALUES
-    (1, 1, '2024-06-01'),
-    (2, 1, '2024-06-02'),
-    (3, 2, '2024-06-03'),
-    (4, 2, '2024-06-04'),
-    (5, 3, '2024-06-05');
-
-
-INSERT INTO teachers (teacher_id, first_name, last_name)
-VALUES
-    (1, 'David', 'Wilson'),
-    (2, 'Sarah', 'Anderson'),
-    (3, 'James', 'Martinez');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (1, 3, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (3, 8, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (4, 1, '2024-02-01T00:00:00.000Z');
+INSERT INTO student_courses (student_id, course_id, payment_date) VALUES (5, 7, '2024-02-01T00:00:00.000Z');
 
 
-INSERT INTO teacher_salaries (salary_id, teacher_id, amount, payment_date)
-VALUES
-    (1, 1, 2500.00, '2024-06-15'),
-    (2, 2, 2800.00, '2024-06-15'),
-    (3, 3, 2700.00, '2024-06-15');
+INSERT INTO teachers (first_name, last_name) VALUES ('Isabel', 'Dickinson');
+INSERT INTO teachers (first_name, last_name) VALUES ('Luis', 'Conn');
+INSERT INTO teachers (first_name, last_name) VALUES ('Sanford', 'Botsford');
+INSERT INTO teachers (first_name, last_name) VALUES ('Jean', 'Torphy');
+INSERT INTO teachers (first_name, last_name) VALUES ('Julien', 'Strosin');
 
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (1, 3992, '2024-02-14T06:37:12.836Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (2, 2289, '2024-02-24T06:41:29.603Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (3, 3068, '2024-02-10T19:49:07.837Z');
+INSERT INTO teacher_salaries (teacher_id, amount, payment_date) VALUES (4, 4522, '2024-02-22T22:19:46.797Z');
 
-INSERT INTO subjects (subject_id, name)
-VALUES
-    (1, 'Mathematics'),
-    (2, 'Physics'),
-    (3, 'History');
+INSERT INTO subjects (name) VALUES ('Mathematics');
+INSERT INTO subjects (name) VALUES ('Physics');
+INSERT INTO subjects (name) VALUES ('Chemistry');
+INSERT INTO subjects (name) VALUES ('Biology');
+INSERT INTO subjects (name) VALUES ('History');
 
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 1, 5);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 2, 7);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 3, 6);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 4, 7);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 5, 3);
+INSERT INTO group_subjects (group_id, subject_id, teacher_id) VALUES (1, 6, 7);
 
-INSERT INTO group_subjects (group_subject_id, group_id, subject_id, teacher_id)
-VALUES
-    (1, 1, 1, 1),
-    (2, 2, 2, 2),
-    (3, 3, 3, 3),
-    (4, 1, 2, 1),
-    (5, 2, 3, 2),
-    (6, 3, 1, 3);
-
-
-INSERT INTO group_subject_schedule (group_subject_id, assignment_id)
-VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5),
-    (6, 6);
+INSERT INTO group_subject_schedule (group_subject_id, assignment_id) VALUES (35, 1);
+INSERT INTO group_subject_schedule (group_subject_id, assignment_id) VALUES (15, 39);
+INSERT INTO group_subject_schedule (group_subject_id, assignment_id) VALUES (17, 46);
+INSERT INTO group_subject_schedule (group_subject_id, assignment_id) VALUES (24, 2);
+INSERT INTO group_subject_schedule (group_subject_id, assignment_id) VALUES (29, 17);
 ```
 
-Uwaga:
-
-1. Zaproponowane w wykazie projektów tabele (ich nazwy) mają wyłącznie charakter informacyjny (przykładowy). Traktować je należy jako wskazówkę, nie jako wymaganie.
-2. Kompletny projekt w postaci pojedynczego pliku w formacie pdf należy umieścić w Sake nie później niż w dniu 28 czerwca br. do godz. 23:59.
-3. Sprawdzaniu i ocenie podlegać będą wyłącznie projekty prawidłowo udokumentowane i umieszczone w Sake (przesłane mailem, przy pomocy wiadomości w Suszi .- bo akurat w ostatniej chwili miałem kłopot z internetem - nie będą uwzględniane).
+#### [Pełny kod wraz z danymi testowymi znajduje się pod podanym linkiem.](https://github.com/progof/wszib-sql-school-management/blob/main/seed.sql)
