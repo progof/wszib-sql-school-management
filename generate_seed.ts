@@ -337,7 +337,7 @@ function getInsertCourseSQL(course: Course) {
 }
 
 function getInsertCourseScheduleSQL(schedule: CourseSchedule) {
-	return `INSERT INTO course_schedule (course_id, assignment_id) VALUES (${schedule.course_id}, ${schedule.assignment_id});`;
+	return `INSERT INTO courses_schedule (course_id, assignment_id) VALUES (${schedule.course_id}, ${schedule.assignment_id});`;
 }
 
 function getInsertGroupSQL(group: Group) {
@@ -391,7 +391,7 @@ const tables = [
 	"student_courses",
 	"students",
 	"groups",
-	"course_schedule",
+	"courses_schedule",
 	"courses",
 	"room_assignments",
 	"rooms",
